@@ -1,0 +1,21 @@
+div {
+    /*border: 1px solid green;*/
+}
+
+.navbar-bb{
+    display:            inline-block;
+    width:              78%;
+}
+.navbar-min{
+    display:            inline-block;
+    width:              20%;
+    height:             100%;
+    text-align:         center;
+    vertical-align:     top;
+    background-color:   #CCC;
+    border-radius:      7px;
+    font-size:          1.5em;
+}
+.navbar-min a:hover{
+    text-decoration:    none;
+}
