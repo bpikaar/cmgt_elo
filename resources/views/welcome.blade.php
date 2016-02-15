@@ -4,3 +4,10 @@
 
 @section('content')
 @endsection
+
+
+<div class="container">
+    <div class="row">
+        TESTING
+    </div>
+</div>
