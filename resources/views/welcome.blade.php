@@ -4,5 +4,3 @@
 
 @section('content')
 @endsection
-
-<div>TESTING!</div>
