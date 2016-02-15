@@ -1,5 +1,4 @@
 <?php
-shell_exec('cd ..');
+chdir('..');
 shell_exec('git pull');
-echo 'Git Pulled';
 ?>
