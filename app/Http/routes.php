@@ -29,8 +29,6 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
 
-
-
     Route::resource('exams', 'ExamsController');
     Route::resource('users', 'UsersController');
     Route::resource('courses', 'CoursesController');
@@ -40,19 +38,23 @@ Route::group(['middleware' => ['web']], function () {
     /**
      * Docent -> beheer
      */
-    Route::get('docent', 'TeacherController@index');
-    Route::get('docent/beoordeling_overzicht_studenten/{course}', 'TeacherController@studentsByCourse');
-    Route::get('docent/beoordeling_toevoegen/{course}/{id}', 'TeacherController@addGrade');
-    Route::post('docent/beoordelingen_opslaan', 'TeacherController@storeResults');
+    Route::group(['prefix'=>'docent'], function() {
+        Route::get('/', 'TeacherController@index');
+        Route::get('beoordeling_overzicht_studenten/{course}', 'TeacherController@studentsByCourse');
+        Route::get('beoordeling_toevoegen/{course}/{id}', 'TeacherController@addGrade');
+        Route::post('beoordelingen_opslaan', 'TeacherController@storeResults');
+    });
 
     /**
      * Student
      */
-    Route::get('student', 'StudentController@index');
-    Route::get('student/assessment/{blockId}', 'StudentController@statusUpdate');
-    Route::get('student/dashboard', 'StudentController@dashboard');
-    Route::get('student/{id}', 'StudentController@assessmentApplication');
-    Route::post('student', 'StudentController@createAssessment');
+    Route::group(['prefix'=>'student'], function() {
+        Route::get('/', 'StudentController@index');
+        Route::get('assessment/{blockId}', 'StudentController@statusUpdate');
+        Route::get('dashboard', 'StudentController@dashboard');
+        Route::get('{id}', 'StudentController@assessmentApplication');
+        Route::post('/', 'StudentController@createAssessment');
+    });
 
 
     Route::get('alle-feedback/{id}', 'FeedbackController@all');
