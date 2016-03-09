@@ -13,6 +13,7 @@
         <!-- CSS And JavaScript -->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     </head>
 
@@ -38,7 +39,9 @@
                         <li><a href="{{ url('/') }}">Home</a></li>
                         <li><a href="{{ url('users') }}">Studenten</a></li>
                         <li><a href="{{ url('courses') }}">Vakken</a></li>
-                        <li><a href="{{ url('docent') }}">Docenten</a></li>
+                        @if(auth()->user()->hasRole('teacher'))
+                            <li><a href="{{ url('docent') }}">Docenten</a></li>
+                        @endif
                         <li><a href="{{ url('bb') }}">Docent</a></li>
                         <li><a href="{{ url('student') }}">Student</a></li>
                     </ul>

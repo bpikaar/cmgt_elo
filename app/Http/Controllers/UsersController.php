@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Roles;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -73,5 +74,16 @@ class UsersController extends Controller
         $user->save();
 
         return redirect('/users');
+    }
+
+    public function roles(User $user) {
+        $roles = Roles::all();
+        return view('users.roles', compact('user', 'roles'));
+    }
+
+    public function storeRoles(Request $request, User $user) {
+        $user->syncRole($request->get('roles'));
+
+        return redirect('users/'.$user->id);
     }
 }

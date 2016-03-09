@@ -18,4 +18,15 @@
         <li>{{$user->code}}</li>
         <li>{{$user->email}}</li>
     </ul>
+    <h3>Rechten</h3>
+    <ul>
+        @foreach($user->roles as $r)
+            <li>{{ $r->name }}</li>
+        @endforeach
+        @if(auth()->user()->hasRole('admin'))
+            <li>
+                <a href="{{ route('user.roles', $user->id) }}">Change</a>
+            </li>
+        @endif
+    </ul>
 @endsection

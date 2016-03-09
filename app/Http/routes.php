@@ -31,6 +31,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::resource('exams', 'ExamsController');
     Route::resource('users', 'UsersController');
+    Route::get('users/{user}/roles', ['as'=>'user.roles', 'uses'=>'UsersController@roles']);
+    Route::post('users/{user}/roles', ['as'=>'user.roles', 'uses'=>'UsersController@storeRoles']);
     Route::resource('courses', 'CoursesController');
     Route::resource('bb', 'BuildingBlocksController');
     //Route::get('users/{id}', 'UsersController@index');
@@ -38,7 +40,7 @@ Route::group(['middleware' => ['web']], function () {
     /**
      * Docent -> beheer
      */
-    Route::group(['prefix'=>'docent'], function() {
+    Route::group(['prefix'=>'docent', 'middleware'=>'hasRole:teacher'], function() {
         Route::get('/', 'TeacherController@index');
         Route::get('beoordeling_overzicht_studenten/{course}', 'TeacherController@studentsByCourse');
         Route::get('beoordeling_toevoegen/{course}/{id}', 'TeacherController@addGrade');

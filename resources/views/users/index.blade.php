@@ -28,6 +28,7 @@
                                 <th>Naam</th>
                                 <th>Code</th>
                                 <th>E-mailadres</th>
+                                <th>Rechten</th>
                             </thead>
 
                             <!-- Table Body -->
@@ -43,6 +44,14 @@
                                     </td>
                                     <td class="table-text">
                                         <div>{{ $user->email }}</div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            @foreach($user->roles as $r)
+                                                {{ $r->name }} |
+                                            @endforeach
+                                                <a href="{{ route('user.roles', $user->id) }}"><i class="fa fa-edit"></i></a>
+                                        </div>
                                     </td>
                                     <td class="table-text">
                                         {{--<div><a href="alle-feedback/{{$user->id}}">Alle feedback</a></div>--}}
